@@ -7,7 +7,6 @@ import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import Link from 'next/link';
 
-// Define a type for our form data
 type FormData = {
   email: string;
   password: string;
@@ -31,10 +30,12 @@ export default function SignIn() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
       <div className="p-8 bg-white rounded-lg shadow-md w-96">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">Welcome Back!</h1>
-        <p className="text-center text-gray-600 mb-6">Let&apos;s continue our journey.</p> {/* Replaced ' with &apos; */}
+        <p className="text-center text-gray-600 mb-6">Let&apos;s continue our journey.</p>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <input {...register('email')} type="email" placeholder="Email" required className="w-full p-2 border rounded" />
-          <input {...register('password')} type="password" placeholder="Password" required className="w-full p-2 border rounded" />
+          {/* Fix is here 👇 */}
+          <input {...register('email')} type="email" placeholder="Email" required className="w-full p-2 border rounded text-gray-800" />
+          {/* Fix is here 👇 */}
+          <input {...register('password')} type="password" placeholder="Password" required className="w-full p-2 border rounded text-gray-800" />
           <button type="submit" className="w-full p-2 text-white bg-blue-500 rounded hover:bg-blue-600">Sign In</button>
         </form>
         <p className="mt-4 text-sm text-center">

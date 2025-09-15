@@ -1,19 +1,26 @@
 // src/app/signin/page.tsx
 'use client';
+
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import Link from 'next/link';
 
+// Define a type for our form data
+type FormData = {
+  email: string;
+  password: string;
+};
+
 export default function SignIn() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormData>();
   const router = useRouter();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormData) => {
     try {
       await signInWithEmailAndPassword(auth, data.email, data.password);
-      router.push('/app/journal'); // Redirect to the journal after sign in
+      router.push('/app/journal');
     } catch (error) {
       console.error(error);
       alert('Failed to sign in. Please check your email and password.');
@@ -24,7 +31,7 @@ export default function SignIn() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-blue-50">
       <div className="p-8 bg-white rounded-lg shadow-md w-96">
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">Welcome Back!</h1>
-        <p className="text-center text-gray-600 mb-6">Let's continue our journey.</p>
+        <p className="text-center text-gray-600 mb-6">Let&apos;s continue our journey.</p> {/* Replaced ' with &apos; */}
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <input {...register('email')} type="email" placeholder="Email" required className="w-full p-2 border rounded" />
           <input {...register('password')} type="password" placeholder="Password" required className="w-full p-2 border rounded" />

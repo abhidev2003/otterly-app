@@ -1,19 +1,26 @@
 // src/app/signup/page.tsx
 'use client';
+
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import Link from 'next/link';
 
+// Define a type for our form data
+type FormData = {
+  email: string;
+  password: string;
+};
+
 export default function SignUp() {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm<FormData>();
   const router = useRouter();
 
-  const onSubmit = async (data: any) => {
+  const onSubmit = async (data: FormData) => {
     try {
       await createUserWithEmailAndPassword(auth, data.email, data.password);
-      router.push('/onboarding'); // Redirect to onboarding after sign up
+      router.push('/onboarding');
     } catch (error) {
       console.error(error);
       alert('Failed to sign up. The email might already be in use.');

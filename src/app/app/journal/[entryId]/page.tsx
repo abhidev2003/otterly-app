@@ -24,7 +24,6 @@ export default function EntryDetailPage({ params }: { params: { entryId: string 
     if (user && entryId) {
       const fetchEntry = async () => {
         setIsLoading(true);
-        // This is the new, simplified path to the entry
         const docRef = doc(firestore, 'users', user.uid, 'entries', entryId);
         const docSnap = await getDoc(docRef);
 
@@ -60,7 +59,7 @@ export default function EntryDetailPage({ params }: { params: { entryId: string 
         <p className="text-gray-800 mb-6 whitespace-pre-wrap">{entry.content}</p>
         {entry.otoReply && (
           <div className="border-t pt-6 mt-6">
-            <h2 className="font-bold text-lg text-gray-700 mb-2">Oto's Letter:</h2>
+            <h2 className="font-bold text-lg text-gray-700 mb-2">Oto&apos;s Letter:</h2>
             <p className="text-gray-600 italic whitespace-pre-wrap">{entry.otoReply}</p>
           </div>
         )}

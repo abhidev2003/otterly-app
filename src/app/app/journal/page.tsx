@@ -7,7 +7,6 @@ import { useAuth } from '@/context/AuthContext';
 import { firestore } from '@/lib/firebase';
 import { collection, addDoc, serverTimestamp, query, orderBy, getDocs, Timestamp } from 'firebase/firestore';
 
-// A simpler interface for our entries
 interface Entry {
   id: string;
   content: string;
@@ -24,7 +23,6 @@ export default function JournalPage() {
   const [currentAiReply, setCurrentAiReply] = useState('');
   const [error, setError] = useState('');
 
-  // Simplified useEffect to fetch entries from 'users/{uid}/entries'
   useEffect(() => {
     if (user) {
       const entriesRef = collection(firestore, 'users', user.uid, 'entries');
@@ -46,9 +44,9 @@ export default function JournalPage() {
     setIsLoading(true);
     setCurrentAiReply('');
     setError('');
+    let finalAiReply = '';
 
     try {
-      // 1. Get context and call the AI API
       const aspirationsColRef = collection(firestore, 'users', user.uid, 'aspirations');
       const aspirationsSnapshot = await getDocs(aspirationsColRef);
       const userAspirations = aspirationsSnapshot.docs.map(doc => doc.data().text);
@@ -64,20 +62,17 @@ export default function JournalPage() {
         throw new Error(`API error: ${response.statusText}`);
       }
       
-      // 2. Get the complete JSON object from the AI
       const { title, reply } = await response.json();
-      setCurrentAiReply(reply); // Show the reply in the UI
+      setCurrentAiReply(reply);
 
-      // 3. Save the entry with the AI-generated title and reply
       const entriesRef = collection(firestore, 'users', user.uid, 'entries');
       await addDoc(entriesRef, { 
-        title: title, // Use the AI-generated title
+        title: title,
         content: newEntryContent,
         otoReply: reply,
         createdAt: serverTimestamp(),
       });
       
-      // 4. Refresh the UI
       setNewEntryContent('');
       const q = query(entriesRef, orderBy('createdAt', 'desc'));
       const querySnapshot = await getDocs(q);
@@ -94,7 +89,7 @@ export default function JournalPage() {
   return (
     <div className="container mx-auto max-w-2xl p-4 bg-gray-50 min-h-screen">
       <header className="text-center my-6">
-        <h1 className="text-4xl font-bold text-gray-800">Oto's Riverbank</h1>
+        <h1 className="text-4xl font-bold text-gray-800">Oto&apos;s Riverbank</h1>
         <p className="text-gray-600">A calm place for your thoughts.</p>
       </header>
       
@@ -119,7 +114,7 @@ export default function JournalPage() {
 
       {currentAiReply && (
         <div className="mb-8 p-6 bg-white rounded-lg shadow-md border-l-4 border-blue-400">
-          <h2 className="font-bold text-lg mb-2 text-gray-700">Oto's Letter:</h2>
+          <h2 className="font-bold text-lg mb-2 text-gray-700">Oto&apos;s Letter:</h2>
           <p className="text-gray-800 whitespace-pre-wrap">{currentAiReply}</p>
         </div>
       )}

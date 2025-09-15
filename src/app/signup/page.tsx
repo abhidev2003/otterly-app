@@ -7,7 +7,6 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '@/lib/firebase';
 import Link from 'next/link';
 
-// Define a type for our form data
 type FormData = {
   email: string;
   password: string;
@@ -33,8 +32,20 @@ export default function SignUp() {
         <h1 className="text-2xl font-bold text-center text-gray-800 mb-2">Join Otterly!</h1>
         <p className="text-center text-gray-600 mb-6">Oto is excited to meet you!</p>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-          <input {...register('email')} type="email" placeholder="Email" required className="w-full p-2 border rounded" />
-          <input {...register('password')} type="password" placeholder="Password (min. 6 characters)" required className="w-full p-2 border rounded" />
+          <input 
+            {...register('email')} 
+            type="email" 
+            placeholder="Email" 
+            required 
+            className="w-full p-2 border rounded text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400" 
+          />
+          <input 
+            {...register('password')} 
+            type="password" 
+            placeholder="Password (min. 6 characters)" 
+            required 
+            className="w-full p-2 border rounded text-gray-800 placeholder:text-gray-400 focus:ring-2 focus:ring-blue-400" 
+          />
           <button type="submit" className="w-full p-2 text-white bg-blue-500 rounded hover:bg-blue-600">Create Account</button>
         </form>
         <p className="mt-4 text-sm text-center">

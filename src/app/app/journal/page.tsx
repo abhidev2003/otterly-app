@@ -3,8 +3,10 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation'; // Import the router
 import { useAuth } from '@/context/AuthContext';
-import { firestore } from '@/lib/firebase';
+import { auth, firestore } from '@/lib/firebase'; // Import auth
+import { signOut } from 'firebase/auth'; // Import signOut
 import { collection, addDoc, serverTimestamp, query, orderBy, getDocs, Timestamp } from 'firebase/firestore';
 
 interface Entry {
@@ -17,6 +19,7 @@ interface Entry {
 
 export default function JournalPage() {
   const { user } = useAuth();
+  const router = useRouter(); // Initialize the router
   const [entries, setEntries] = useState<Entry[]>([]);
   const [newEntryContent, setNewEntryContent] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +47,6 @@ export default function JournalPage() {
     setIsLoading(true);
     setCurrentAiReply('');
     setError('');
-    // The 'finalAiReply' variable that caused the error has been removed.
 
     try {
       const aspirationsColRef = collection(firestore, 'users', user.uid, 'aspirations');
@@ -86,11 +88,29 @@ export default function JournalPage() {
     }
   };
 
+  // The new logout function
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push('/signin'); // Redirect to sign-in page after logout
+    } catch (error) {
+      console.error("Error signing out:", error);
+      alert("Failed to sign out.");
+    }
+  };
+
   return (
     <div className="container mx-auto max-w-2xl p-4 bg-gray-50 min-h-screen">
       <header className="text-center my-6">
         <h1 className="text-4xl font-bold text-gray-800">Oto&apos;s Riverbank</h1>
         <p className="text-gray-600">A calm place for your thoughts.</p>
+        {/* The new Logout Button */}
+        <button
+          onClick={handleLogout}
+          className="mt-4 px-4 py-2 text-sm text-gray-700 bg-white rounded-lg shadow-sm hover:bg-gray-100 border transition-colors"
+        >
+          Logout
+        </button>
       </header>
       
       <form onSubmit={handleSaveEntry} className="bg-white p-6 rounded-lg shadow-md mb-8">
@@ -98,7 +118,8 @@ export default function JournalPage() {
           value={newEntryContent} 
           onChange={(e) => setNewEntryContent(e.target.value)} 
           placeholder="Dear Diary..." 
-          className="w-full h-40 p-3 border rounded-md" 
+          // The text color fix is here
+          className="w-full h-40 p-3 border rounded-md text-gray-800 focus:ring-2 focus:ring-blue-400" 
           disabled={isLoading} 
         />
         <button 

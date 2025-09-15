@@ -44,7 +44,7 @@ export default function JournalPage() {
     setIsLoading(true);
     setCurrentAiReply('');
     setError('');
-    let finalAiReply = '';
+    // The 'finalAiReply' variable that caused the error has been removed.
 
     try {
       const aspirationsColRef = collection(firestore, 'users', user.uid, 'aspirations');

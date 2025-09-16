@@ -1,82 +1,38 @@
 # Otterly 🦦
 
-Welcome to Otterly, a friendly, AI-powered journaling companion designed to make self-reflection effortless and meaningful. With a little help from our mascot, Oto the Otter, users can capture their daily thoughts, receive empathetic AI-generated feedback, and track their personal journey.
-
-This project was built with a beginner-friendly, modern tech stack, focusing on serverless technologies and in-browser machine learning.
+Welcome to Otterly, a new kind of journaling app where your thoughts are met with understanding. Otterly is more than just a digital diary; it's a private space for reflection, guided by an empathetic AI companion, Oto the Otter.
 
 
 ---
 
-## ## Features
+## ## Why Otterly? What Makes It Different?
 
-* **Secure User Authentication**: Users can sign up and sign in securely with email and password.
-* **Private Journaling**: All journal entries are stored securely in Firestore and are only accessible by the user who created them.
-* **AI Companion (Oto)**: After saving an entry, users receive a warm, empathetic reply from Oto, powered by a Large Language Model.
-* **AI-Generated Titles**: Each entry is automatically given a creative title by the AI.
-* **Journal History**: Users can view a list of their past entries and click to see the full content and Oto's reply.
-* **Onboarding Flow**: A friendly onboarding process to welcome new users and gather their aspirations.
+In a world of complex, data-hungry apps, Otterly is designed to be a simple, safe, and supportive companion.
 
----
+**1. Your Empathetic AI Companion, Not Just a Text Box:**
+Unlike traditional journaling apps that are just passive notepads, Otterly actively engages with you. Every time you save an entry, our AI companion, **Oto**, reads it with context and provides a warm, supportive, and non-judgmental response. It’s designed to feel less like logging data and more like a thoughtful conversation, helping you find perspective and feel validated.
 
-## ## Tech Stack & Key Technologies
+**2. Privacy-First, Modern Technology:**
+Otterly is built on a serverless architecture, which means your data isn't sitting on a single, constantly running server. All entries are secured in your private Firestore database, with rules that only you can access them. We use Cloudflare's privacy-focused AI to generate replies without permanently storing your entry content. It’s your private journal, powered by modern, secure technology.
 
-* **Framework**: [Next.js](https://nextjs.org/) (App Router with TypeScript)
-* **Hosting**: [Vercel](https://vercel.com/) (Hobby Tier)
-* **Authentication**: [Firebase Authentication](https://firebase.google.com/docs/auth)
-* **Database**: [Cloud Firestore](https://firebase.google.com/docs/firestore)
-* **AI Language Model**: [Cloudflare Workers AI](https://developers.cloudflare.com/workers-ai/) (using a small, fast instruction model)
-* **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-* **Form Management**: [React Hook Form](https://react-hook-form.com/)
+**3. Simplicity by Design:**
+Many journaling apps are bloated with features that distract from the core purpose of reflection. Otterly focuses on one thing: the conversation between you and your thoughts, with a little guidance from Oto. The interface is clean, minimal, and designed to create a calm, focused writing experience. No complex charts, social features, or unnecessary clutter—just a safe riverbank for your thoughts.
 
 ---
 
-## ## Getting Started
+## ## Core Features
 
-### ### Prerequisites
+* **Secure Authentication**: Private accounts with email and password.
+* **AI Companion (Oto)**: Receive a unique, empathetic reply for every entry.
+* **AI-Generated Titles**: Oto suggests a creative title for each entry.
+* **Clean History View**: Easily review your past entries and Oto's feedback.
 
-* Node.js (v18 or newer)
-* npm or pnpm
-* Git
+---
 
-### ### Setup & Installation
+## ## Tech Stack
 
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/your-username/otterly-app.git](https://github.com/your-username/otterly-app.git)
-    cd otterly-app
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-3.  **Set up your environment variables:**
-    * Create a new file in the root of the project named `.env.local`.
-    * Copy the contents of `.env.local.example` (if you have one) or add the following variables:
-
-    ```env
-    # Firebase Configuration
-    NEXT_PUBLIC_FIREBASE_API_KEY=
-    NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID=
-    NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=
-    NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=
-    NEXT_PUBLIC_FIREBASE_APP_ID=
-
-    # Cloudflare AI Configuration
-    CF_ACCOUNT_ID=
-    CF_API_TOKEN=
-    CF_AI_MODEL=@cf/meta/llama-3.1-8b-instruct
-    ```
-
-4.  **Populate your environment variables:**
-    * **Firebase**: Go to your Firebase project settings, add a web app, and copy the configuration values.
-    * **Cloudflare**: Go to your Cloudflare dashboard to find your Account ID and create a Workers AI API Token.
-
-5.  **Run the development server:**
-    ```bash
-    npm run dev
-    ```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+* **Framework**: Next.js (App Router)
+* **Hosting**: Vercel
+* **Authentication & Database**: Firebase (Auth & Firestore)
+* **AI Language Model**: Cloudflare Workers AI
+* **Styling**: Tailwind CSS

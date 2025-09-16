@@ -4,7 +4,6 @@ Welcome to Otterly, a friendly, AI-powered journaling companion designed to make
 
 This project was built with a beginner-friendly, modern tech stack, focusing on serverless technologies and in-browser machine learning.
 
-![Oto the Otter, the friendly mascot for Otterly](https://i.imgur.com/your-image-link-here.png)
 *(To make the image above work, upload the `oto-logo.png` to an image hosting service like [Imgur](https://imgur.com/upload) and replace the link.)*
 
 ---
